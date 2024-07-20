@@ -1,3 +1,5 @@
+// prompt e ParseInt são termos que não foram ensinados na aula mas foram pesquisador por mim em busca de fazer um código mais adequado para a proposta da atividade
+
 let nomeHeroi = prompt("Digite o nome do seu Herói: ");
 let numeroXP = parseInt(prompt("Digite a quantidade de seu XP: "));
 
