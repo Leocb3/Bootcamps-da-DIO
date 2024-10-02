@@ -1,17 +1,16 @@
-package com.exemplo.calculadoraapp;
+package br.uniceub.cc.pdm.fitcalcapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import br.uniceub.cc.pdm.fitcalcapp.R;
 
-public class TelaPrincipal extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
 
     //  ÁREA DE ATRIBUTOS
 
@@ -43,12 +42,12 @@ public class TelaPrincipal extends AppCompatActivity {
 
     // Métodos para Navegação entre Telas
 
-    public void exibirTelaInicial() {
-        setContentView(R.layout.tela_inicial);
+    private void exibirTelaInicial() {
+        setContentView(R.layout.tela_principal);
 
         botaoNavegarPesoIdeal = findViewById(R.id.botaoPesoIdeal);
         botaoNavegarAlturaIdeal = findViewById(R.id.botaoAlturaIdeal);
-        Button botaoCalcularImc = findViewById(R.id.botaoIMC);
+        botaoCalcularImc = findViewById(R.id.botaoIMC); // Removido a redeclaração
 
         botaoNavegarPesoIdeal.setOnClickListener(view -> exibirCalculadoraPesoIdeal());
         botaoNavegarAlturaIdeal.setOnClickListener(view -> exibirCalculadoraAlturaIdeal());
@@ -56,7 +55,7 @@ public class TelaPrincipal extends AppCompatActivity {
     }
 
     // Carrega a Calculadora de IMC
-    public void exibirCalculadoraIMC() {
+    private void exibirCalculadoraIMC() {
         setContentView(R.layout.calculadora_imc);
 
         botaoCalcularImc = findViewById(R.id.botaoCalcularImc);
@@ -73,7 +72,7 @@ public class TelaPrincipal extends AppCompatActivity {
     }
 
     // Carrega a Calculadora de Peso Ideal
-    public void exibirCalculadoraPesoIdeal() {
+    private void exibirCalculadoraPesoIdeal() {
         setContentView(R.layout.calculadora_peso_ideal);
 
         botaoCalcularPesoIdeal = findViewById(R.id.botaoCalcularPesoIdeal);
@@ -89,7 +88,7 @@ public class TelaPrincipal extends AppCompatActivity {
     }
 
     // Carrega a Calculadora de Altura Ideal (Meme)
-    public void exibirCalculadoraAlturaIdeal() {
+    private void exibirCalculadoraAlturaIdeal() {
         setContentView(R.layout.calculadora_altura_ideal);
 
         botaoCalcularAlturaIdeal = findViewById(R.id.botaoCalcularAlturaIdeal);
@@ -107,7 +106,7 @@ public class TelaPrincipal extends AppCompatActivity {
     //  Métodos de Cálculo
 
     // Método para calcular o IMC
-    public void calcularImc() {
+    private void calcularImc() {
         try {
             float altura = Float.parseFloat(campoAlturaImc.getText().toString());
             float peso = Float.parseFloat(campoPesoImc.getText().toString());
@@ -115,32 +114,34 @@ public class TelaPrincipal extends AppCompatActivity {
             boolean isMasculino = sexoId == R.id.radioMasculinoImc;
 
             float imc = peso / (altura * altura);
-            String resultado;
-
-            if (isMasculino) {
-                if (imc < 18.5) resultado = "Abaixo do peso";
-                else if (imc < 24.9) resultado = "Peso normal";
-                else if (imc < 29.9) resultado = "Pré-obesidade";
-                else if (imc < 34.9) resultado = "Obesidade Grau 1";
-                else if (imc < 39.9) resultado = "Obesidade Grau 2";
-                else resultado = "Obesidade Grau 3";
-            } else {
-                if (imc < 18.5) resultado = "Abaixo do peso";
-                else if (imc < 26.9) resultado = "Peso normal";
-                else if (imc < 32.9) resultado = "Pré-obesidade";
-                else if (imc < 37.9) resultado = "Obesidade Grau 1";
-                else if (imc < 44.9) resultado = "Obesidade Grau 2";
-                else resultado = "Obesidade Grau 3";
-            }
-
+            String resultado = calcularResultadoImc(imc, isMasculino);
             textoResultadoImc.setText("IMC: " + String.format("%.2f", imc) + " - " + resultado);
         } catch (NumberFormatException e) {
             textoResultadoImc.setText("Por favor, insira valores válidos.");
         }
     }
 
+    // Método auxiliar para calcular o resultado do IMC
+    private String calcularResultadoImc(float imc, boolean isMasculino) {
+        if (isMasculino) {
+            if (imc < 18.5) return "Abaixo do peso";
+            else if (imc < 24.9) return "Peso normal";
+            else if (imc < 29.9) return "Pré-obesidade";
+            else if (imc < 34.9) return "Obesidade Grau 1";
+            else if (imc < 39.9) return "Obesidade Grau 2";
+            else return "Obesidade Grau 3";
+        } else {
+            if (imc < 18.5) return "Abaixo do peso";
+            else if (imc < 26.9) return "Peso normal";
+            else if (imc < 32.9) return "Pré-obesidade";
+            else if (imc < 37.9) return "Obesidade Grau 1";
+            else if (imc < 44.9) return "Obesidade Grau 2";
+            else return "Obesidade Grau 3";
+        }
+    }
+
     // Método para calcular o Peso Ideal
-    public void calcularPesoIdeal() {
+    private void calcularPesoIdeal() {
         try {
             float altura = Float.parseFloat(campoAlturaPesoIdeal.getText().toString());
             int sexoId = grupoSexoPesoIdeal.getCheckedRadioButtonId();
@@ -154,7 +155,7 @@ public class TelaPrincipal extends AppCompatActivity {
     }
 
     // Método para calcular a Altura Ideal (Meme)
-    public void calcularAlturaIdeal() {
+    private void calcularAlturaIdeal() {
         try {
             float peso = Float.parseFloat(campoPesoAlturaIdeal.getText().toString());
             int sexoId = grupoSexoAlturaIdeal.getCheckedRadioButtonId();
