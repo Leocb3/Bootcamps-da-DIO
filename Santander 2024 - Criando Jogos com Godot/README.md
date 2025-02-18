@@ -1,4 +1,4 @@
 ## 💲 Bootcamp Santander
 
-Repositório para os projetos do Bootcamp de Godot do Santander
+Repositório para os projetos do Bootcamp de Godot do Santander da DIO
 
