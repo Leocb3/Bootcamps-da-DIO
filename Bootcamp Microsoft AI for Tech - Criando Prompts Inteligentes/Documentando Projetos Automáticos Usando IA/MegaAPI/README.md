@@ -96,4 +96,4 @@ src
 Para mais detalhes sobre o projeto, consulte os arquivos e diretórios acima mencionados.
 
 🤓 Leonardo Chung Bezerra -
-[Github](https://github.com/Leocb3)
+[GitHub](https://github.com/Leocb3)
