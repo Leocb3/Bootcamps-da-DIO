@@ -1,2 +1,2 @@
-# 🎯 Trabalhos
-Repositório para trabalhos da faculdade e outras certificações
+# 🎯 Bootcamps da DIO
+Repositório para os trabalhos "práticos" da DIO
